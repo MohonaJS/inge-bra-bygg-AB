@@ -1,13 +1,14 @@
-const express = require('express')
+const express = require("express");
+const app = new express();
 
-const app = express();
+const apiRouter = require("./src/routes/api");
 
-app.get('/', (req, res) => {
-    res.send('hello')
-})
+// Api routes
+app.use("/api/v1", apiRouter);
 
+// undefine routes
+app.use("*", (req, res) => {
+  res.status(404).json({ status: "fail", data: "not found" });
+});
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`Server is running at port ${PORT}`);
-})
+module.exports = app;
