@@ -1,0 +1,29 @@
+{
+  "name": "inge-bra-bygg-ab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohonaJS/inge-bra-bygg-AB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MohonaJS/inge-bra-bygg-AB/issues"
+  },
+  "homepage": "https://github.com/MohonaJS/inge-bra-bygg-AB#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.7",
+    "express": "^4.18.0",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
+    "sequelize": "^6.19.0",
+    "sqlite3": "^5.0.6"
+  }
+}
