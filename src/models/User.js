@@ -33,4 +33,12 @@ module.exports = (sequelize, DataTypes) => {
       updatedAt: "updated_at",
     }
   );
+
+  User.beforeCreate(async (user, options) => {
+    const bcrypt = require("bcrypt");
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    user.password = hashedPassword;
+  });
+
+  return User;
 };
