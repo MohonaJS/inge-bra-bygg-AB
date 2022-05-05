@@ -33,5 +33,4 @@ module.exports = (sequelize, DataTypes) => {
       updatedAt: "updated_at",
     }
   );
-  return User;
 };

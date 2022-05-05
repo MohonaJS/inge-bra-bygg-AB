@@ -54,5 +54,6 @@ router.get(
 
 // client dashboard
 router.get("/client-dashboard", ClientMiddleware, ClientController.dashboard);
+router.post("/client-dashboard", ClientController.createMessage);
 
 module.exports = router;
