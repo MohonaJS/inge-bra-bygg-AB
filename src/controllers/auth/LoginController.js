@@ -10,18 +10,17 @@ const loginPage = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  let { user_id, password } = req.body;
-  let user = await User.findOne({ where: { user_id: user_id } });
-  let hashPassword;
-  if (user) hashPassword = await bcrypt.compare(password, user.password);
+  let { name, password } = req.body;
+  let user = await User.findOne({ where: { name } });
+  let dbPassword = await User.findOne({ where: { password } });
+  // let hashPassword = await bcrypt.compare(password, user.password);
 
   let payload = {
     exp: Math.floor(Date.now() / 1000) + 60 * 60,
     data: user,
   };
 
-  if (user && hashPassword) {
-    // res.render("dashboard");
+  if (user && dbPassword) {
     res.status(200).json({
       status: "ok",
       data: user,

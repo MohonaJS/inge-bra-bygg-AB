@@ -1,10 +1,11 @@
 const express = require("express");
-const RegistrationController = require("../controllers/auth/RegistrationController");
+// const RegistrationController = require("../controllers/auth/RegistrationController");
 const LoginController = require("../controllers/auth/LoginController");
 const AdminController = require("../controllers/AdminController");
 const EmployeeController = require("../controllers/EmployeeController");
 const ClientController = require("../controllers/ClientController");
 
+// MIDDLEWARES
 const Authenticate = require("../middlewares/Authenticate");
 const AdminMiddleware = require("../middlewares/AdminMiddleware");
 const EmployeeMiddleware = require("../middlewares/EmployeeMiddleware");
@@ -26,14 +27,14 @@ router.get("/clientDashboard", (req, res) => {
 });
 
 // registration
-router.get("/registration", RegistrationController.index);
-router.post("/registration", RegistrationController.storeAdmin);
+// router.get("/registration", RegistrationController.index);
+// router.post("/registration", RegistrationController.storeAdmin);
 // router.post("/admin", RegistrationController.storeAdmin);
 
 // router.post("/employee", RegistrationController.storeEmployee);
 // router.post("/registration", RegistrationController.storeClient);
 
-// login
+// LOGIN
 router.get("/login", LoginController.loginPage);
 router.post("/login", LoginController.login);
 
@@ -41,7 +42,8 @@ router.post("/login", LoginController.login);
 router.get("/users", Authenticate, AdminController.userIndex);
 
 // admin dashboard
-router.get("/admin-dashboard", AdminMiddleware, AdminController.dashboard);
+// router.get("/admin-dashboard", AdminMiddleware, AdminController.dashboard);
+router.get("/admin-dashboard", AdminMiddleware, AdminController.userIndex);
 
 // employee dashboard
 router.get(

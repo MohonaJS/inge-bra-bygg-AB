@@ -47,7 +47,7 @@
                 <p class="text-muted">Sign in to continue to Inge Bra AB.</p>
               </div>
               <div class="p-2 mt-4">
-                <form action="/LoginController.login" method="POST">
+                <form action="/login" method="POST">
                   <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input
@@ -59,11 +59,16 @@
                   </div>
 
                   <div class="mb-3">
-                    <div class="float-end">
-                      <a href="auth-pass-reset-basic.html" class="text-muted"
-                        >Forgot password?</a
-                      >
-                    </div>
+                    <label class="form-label">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="Enter email"
+                      name="email"
+                    />
+                  </div>
+
+                  <div class="mb-3">
                     <label class="form-label" for="password-input"
                       >Password</label
                     >
@@ -74,13 +79,6 @@
                         placeholder="Enter password"
                         name="password"
                       />
-                      <button
-                        class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
-                        type="button"
-                        id="password-addon"
-                      >
-                        <i class="ri-eye-fill align-middle"></i>
-                      </button>
                     </div>
                   </div>
 
@@ -92,18 +90,6 @@
                       <option value="client">Client</option>
                     </select>
                   </div> -->
-
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="auth-remember-check"
-                    />
-                    <label class="form-check-label" for="auth-remember-check"
-                      >Remember me</label
-                    >
-                  </div>
 
                   <div class="mt-4">
                     <button class="btn btn-success w-100" type="submit">
@@ -130,13 +116,9 @@
           </div>
         </div>
       </div>
-      <!-- end row -->
     </div>
-    <!-- end container -->
   </div>
-  <!-- end auth page content -->
 
-  <!-- footer -->
   <footer class="footer start-0">
     <div class="container">
       <div class="row">
@@ -156,7 +138,6 @@
       </div>
     </div>
   </footer>
-  <!-- end Footer -->
 </div>
 
 <%- include('footer.ejs') %>
