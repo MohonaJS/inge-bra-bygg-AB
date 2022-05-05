@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "setup": "node src/configs/setup.js",
+    "seed": "node src/configs/seeder.js",
     "start": "nodemon public/index.js"
   },
   "repository": {
@@ -18,7 +20,7 @@
   },
   "homepage": "https://github.com/MohonaJS/inge-bra-bygg-AB#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
