@@ -16,12 +16,6 @@ const createTask = async (req, res) => {
 
 const getTask = async (req, res) => {
   const user_id = req.user.id;
-  if (req.user.role == "admin") {
-    tasks = await Task.findAll({});
-  }
-  if (req.user.userRole == "client") {
-    tasks = await Task.findAll({ where: { client_id: user_id } });
-  }
   if (req.user.userRole == "employee") {
     tasks = await Task.findAll({ where: { employee_id: user_id } });
   }
