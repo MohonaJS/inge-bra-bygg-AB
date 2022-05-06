@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 const db_config = require("../configs/db_config");
 const Task_message = db_config.task_message;
 
@@ -22,4 +20,3 @@ module.exports = {
   createMessage,
   seeMyTask,
 };
->>>>>>> 04794338f42a15842cf695946ed4f3a81f802998
