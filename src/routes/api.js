@@ -14,17 +14,17 @@ const ClientMiddleware = require("../middlewares/ClientMiddleware");
 const router = express.Router();
 
 // different get methods for different users
-router.get("/adminDashboard", (req, res) => {
-  res.render("adminDashboard");
-});
+// router.get("/adminDashboard", (req, res) => {
+//   res.render("adminDashboard");
+// });
 
-router.get("/workerDashboard", (req, res) => {
-  res.render("workerDashboard");
-});
+// router.get("/workerDashboard", (req, res) => {
+//   res.render("workerDashboard");
+// });
 
-router.get("/clientDashboard", (req, res) => {
-  res.render("clientDashboard");
-});
+// router.get("/clientDashboard", (req, res) => {
+//   res.render("clientDashboard");
+// });
 
 // registration
 // router.get("/registration", RegistrationController.index);
@@ -45,6 +45,9 @@ router.get("/users", Authenticate, AdminController.userIndex);
 // router.get("/admin-dashboard", AdminMiddleware, AdminController.dashboard);
 router.get("/admin-dashboard", AdminMiddleware, AdminController.userIndex);
 
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
 // employee dashboard
 router.get(
   "/employee-dashboard",
@@ -52,6 +55,27 @@ router.get(
   EmployeeController.dashboard
 );
 
+router.post(
+  "/employee-dashboard",
+  EmployeeMiddleware,
+  EmployeeController.createTask
+);
+
+router.get(
+  "/employee-dashboard/:id",
+  EmployeeMiddleware,
+  EmployeeController.getTask
+);
+
+router.patch(
+  "/employee-dashboard/:id",
+  EmployeeMiddleware,
+  EmployeeController.updateTask
+);
+
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
 // client dashboard
 router.get("/client-dashboard", ClientMiddleware, ClientController.dashboard);
 router.post("/client-dashboard", ClientController.createMessage);

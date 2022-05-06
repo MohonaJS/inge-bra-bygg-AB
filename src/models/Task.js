@@ -5,7 +5,17 @@ module.exports = (sequelize, DataTypes) => {
       task_id: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
+      },
+      employee_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        // unique: true,
+      },
+      client_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        // unique: true,
       },
       name: {
         type: DataTypes.STRING,
@@ -14,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       image: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        default: false,
       },
     },
     {

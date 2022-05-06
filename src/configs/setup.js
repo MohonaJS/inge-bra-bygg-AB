@@ -5,7 +5,7 @@ const Task = db_config.task;
 const Task_Message = db_config.task_message;
 const Conversation = db_config.conversation;
 
-//  users conversations messages tasks
+//  users - tasks - task_messages - conversations
 
 User.belongsToMany(Conversation, { through: "ConversationUser" });
 Conversation.belongsToMany(User, { through: "ConversationUser" });

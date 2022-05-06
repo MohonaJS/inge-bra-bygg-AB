@@ -20,7 +20,39 @@ const userIndex = async (req, res) => {
   }
 };
 
+const createTask = async (req, res) => {
+  let { task_id, name, image, status } = req.body;
+  console.log(task_id, name, image, status);
+  await Task.create(req.body);
+  // res.send(`${task_id} ${name} ${image} ${status}`);
+};
+
+const getTask = async (req, res) => {
+  const user_id = req.user.id;
+  if (req.user.role == "admin") {
+    tasks = await Task.findAll({});
+  }
+  res.json(tasks);
+};
+
+const updateTask = async (req, res) => {
+  res.send("the task is updated");
+};
+
+const deleteTask = async (req, res) => {
+  res.send("the task is deleted");
+};
+
+const deleteUser = async (req, res) => {
+  res.send("the user is deleted");
+};
+
 module.exports = {
-  userIndex,
   dashboard,
+  userIndex,
+  createTask,
+  getTask,
+  updateTask,
+  deleteTask,
+  deleteUser,
 };
