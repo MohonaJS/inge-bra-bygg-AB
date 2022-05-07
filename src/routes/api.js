@@ -1,4 +1,6 @@
 const express = require("express");
+const router = express.Router();
+
 // const RegistrationController = require("../controllers/auth/RegistrationController");
 const LoginController = require("../controllers/auth/LoginController");
 const AdminController = require("../controllers/AdminController");
@@ -11,73 +13,74 @@ const AdminMiddleware = require("../middlewares/AdminMiddleware");
 const EmployeeMiddleware = require("../middlewares/EmployeeMiddleware");
 const ClientMiddleware = require("../middlewares/ClientMiddleware");
 
-const router = express.Router();
-
-// different get methods for different users
-// router.get("/adminDashboard", (req, res) => {
-//   res.render("adminDashboard");
-// });
-
-// router.get("/workerDashboard", (req, res) => {
-//   res.render("workerDashboard");
-// });
-
-// router.get("/clientDashboard", (req, res) => {
-//   res.render("clientDashboard");
-// });
-
-// registration
-// router.get("/registration", RegistrationController.index);
-// router.post("/registration", RegistrationController.storeAdmin);
-// router.post("/admin", RegistrationController.storeAdmin);
-
-// router.post("/employee", RegistrationController.storeEmployee);
-// router.post("/registration", RegistrationController.storeClient);
-
 // LOGIN
 router.get("/login", LoginController.loginPage);
 router.post("/login", LoginController.login);
 
-// auth routes
-router.get("/users", Authenticate, AdminController.userIndex);
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+// AUTH ROUTES
+// ADMIN DASHBOARD
+router.get("/admin_dashboard", Authenticate, AdminController.dashboard);
 
-// admin dashboard
-// router.get("/admin-dashboard", AdminMiddleware, AdminController.dashboard);
-router.get("/admin-dashboard", AdminMiddleware, AdminController.userIndex);
+router.get("/get_users", Authenticate, AdminController.get_users);
+router.post("/create_user", AdminMiddleware, AdminController.create_user);
+router.patch("/update_user/:id", AdminMiddleware, AdminController.update_user);
+router.delete("/delete_user/:id", AdminMiddleware, AdminController.delete_user);
+
+router.post("/create_task", AdminMiddleware, AdminController.create_task);
+router.get("/get_task", AdminMiddleware, AdminController.get_task);
+router.patch("/update_task/:id", AdminMiddleware, AdminController.update_task);
+router.delete("/delete_task/:id", AdminMiddleware, AdminController.delete_task);
+
+router.delete(
+  "/delete_task_message/:id",
+  AdminMiddleware,
+  AdminController.delete_task_message
+);
+
+router.delete(
+  "/delete_task_image/:id",
+  AdminMiddleware,
+  AdminController.delete_task_image
+);
 
 // -------------------------------------------
 // -------------------------------------------
 // -------------------------------------------
-// employee dashboard
+// EMPLOYEE DASHBOARD
 router.get(
-  "/employee-dashboard",
+  "/employee_dashboard",
   EmployeeMiddleware,
-  EmployeeController.dashboard
+  EmployeeController.employee_dashboard
+);
+router.post("/create_task", EmployeeMiddleware, EmployeeController.create_task);
+router.get("/get_task/:id", EmployeeMiddleware, EmployeeController.get_task);
+router.patch(
+  "/update_task/:id",
+  EmployeeMiddleware,
+  EmployeeController.update_task
 );
 
 router.post(
-  "/employee-dashboard",
+  "/create_task_message",
   EmployeeMiddleware,
-  EmployeeController.createTask
+  EmployeeController.create_task_message
 );
 
+router.post("/uploadImage", EmployeeMiddleware, EmployeeController.uploadImage);
+
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+// CLIENT DASHBOARD
 router.get(
-  "/employee-dashboard/:id",
-  EmployeeMiddleware,
-  EmployeeController.getTask
+  "/client_dashboard",
+  ClientMiddleware,
+  ClientController.client_dashboard
 );
-
-router.patch(
-  "/employee-dashboard/:id",
-  EmployeeMiddleware,
-  EmployeeController.updateTask
-);
-
-// -------------------------------------------
-// -------------------------------------------
-// -------------------------------------------
-// client dashboard
-router.get("/client-dashboard", ClientMiddleware, ClientController.dashboard);
-router.post("/client-dashboard", ClientController.createMessage);
+router.get("/see_my_task", ClientMiddleware, ClientController.see_my_task);
+router.post("/create_task_message", ClientController.create_task_message);
 
 module.exports = router;

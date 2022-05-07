@@ -7,20 +7,20 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         // unique: true,
       },
-      employee_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        // unique: true,
-      },
+      // employee_id: {
+      //   type: DataTypes.STRING,
+      //   allowNull: false,
+      //   // unique: true,
+      // },
       client_id: {
         type: DataTypes.STRING,
         allowNull: false,
         // unique: true,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      // name: {
+      //   type: DataTypes.STRING,
+      //   allowNull: false,
+      // },
       image: {
         type: DataTypes.STRING,
         allowNull: false,

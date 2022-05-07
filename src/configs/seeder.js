@@ -1,6 +1,7 @@
 const db_config = require("./db_config");
 
 const User = db_config.user;
+const Task = db_config.task;
 
 const seed = async () => {
   await User.create({
@@ -26,5 +27,14 @@ const seed = async () => {
     password: "1",
     role: "client",
   });
+
+  // await Task.create({
+  //   // user_id: "teja",
+  //   task_id: "house",
+  //   employee_id: "nabhan",
+  //   client_id: "teja",
+  //   image: "house.png",
+  //   status: false,
+  // });
 };
 seed();

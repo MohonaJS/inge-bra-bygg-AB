@@ -18,6 +18,12 @@ Conversation.belongsTo(Task);
 
 Task.belongsTo(User);
 
+// User.hasMany(Task);
+// Task.belongsTo(User);
+
+// Task_Message.belongsTo(User, { foreignKey: "user_id" });
+// Task_Message.belongsTo(Task, { foreignKey: "task_id" });
+
 module.exports = {
   User,
   Task,
