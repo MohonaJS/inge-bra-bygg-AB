@@ -15,7 +15,7 @@ router.post(
 ),
   router.patch(
     "/update_task/:id",
-    Authenticate.admin,
+    Authenticate.user,
     asyncHandler(task_controller.update_task)
   ),
   router.get(
@@ -26,7 +26,7 @@ router.post(
 
 router.delete(
   "/delete_task/:id",
-  Authenticate.admin,
+  Authenticate.user,
   asyncHandler(task_controller.delete_task)
 );
 

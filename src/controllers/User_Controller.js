@@ -33,14 +33,6 @@ module.exports = {
       res.json("user already exists");
     }
   },
-
-  update_user: async (req, res) => {
-    res.json("update the user");
-  },
-
-  delete_user: async (req, res) => {
-    res.json("delete the user");
-  },
 };
 
 function generateHash(password) {

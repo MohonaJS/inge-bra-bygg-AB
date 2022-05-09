@@ -20,22 +20,10 @@ router.post(
   asyncHandler(user_controller.create_user)
 );
 
-// router.patch(
-//   "/update_user/:id",
-//   AdminMiddleware,
-//   Validations.createUser,
-//   asyncHandler(user_controller.update_user)
-// );
-
 router.delete(
   "/delete_user/:id",
   AdminMiddleware,
   asyncHandler(user_controller.delete_user)
 );
-
-// router.post(
-//   "/create_employee",
-//   user_controller.create_employee
-// );
 
 module.exports = router;

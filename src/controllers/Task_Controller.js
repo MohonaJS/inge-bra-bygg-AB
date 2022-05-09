@@ -37,19 +37,13 @@ module.exports = {
     }
   },
 
-  delete_task: async (req, res) => {
-    if (!req.user.role == "admin") {
-      res.json("you are not allowed");
-    }
-    if (req.user.role === "admin") {
-      const task = await Task.findByPk(req.params.id);
-      if (!task) {
-        res.json("no task was found");
-      }
-      if (task) {
-        await Task.destroy({ where: { id: req.params.id } });
-        res.json("task is deleted");
-      }
-    }
+  create_task_message: async (req, res) => {
+    const task = await Task_message.create(req.body);
+    res.json("task message is created");
+  },
+
+  get_task_message: async (req, res) => {
+    const task_message = await Task_message.findAll();
+    res.json(task_message);
   },
 };

@@ -38,10 +38,4 @@ module.exports = {
     check("task_content").exists().withMessage("Missing task description"),
     check("user_id").exists().withMessage("Missing user_id"),
   ]),
-  //   updateTask: validator([
-  //     check("taskStatus")
-  //       .exists()
-  //       .isIn(["pending", "in progress", "completed"])
-  //       .withMessage("Missing task status"),
-  //   ]),
 };

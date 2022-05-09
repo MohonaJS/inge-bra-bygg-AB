@@ -5,7 +5,6 @@ const Task = db_config.task;
 
 const seed = async () => {
   await User.create({
-    // user_id: "mohona",
     name: "mohona",
     email: "mohona@admin.com",
     password: "1",
@@ -13,7 +12,6 @@ const seed = async () => {
   });
 
   await User.create({
-    // user_id: "nabhan",
     name: "nabhan",
     email: "nabhan@employee.com",
     password: "1",
@@ -21,7 +19,6 @@ const seed = async () => {
   });
 
   await User.create({
-    // user_id: "teja",
     name: "teja",
     email: "teja@client.com",
     password: "1",

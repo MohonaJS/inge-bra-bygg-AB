@@ -2,24 +2,28 @@ module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define(
     "task",
     {
+      task_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
       desc: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
 
       client_id: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
 
       employee_id: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
 
       image: {
@@ -28,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
 
       status: {
         type: DataTypes.BOOLEAN,
-        // default: false,
+        default: false,
       },
     },
     {
