@@ -36,4 +36,10 @@ router.post(
   asyncHandler(task_controller.create_task_message)
 );
 
+router.get(
+  "/:id/get_task_message",
+  Authenticate.user,
+  asyncHandler(task_controller.get_task_message)
+);
+
 module.exports = router;

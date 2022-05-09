@@ -38,18 +38,9 @@ module.exports = {
   },
 
   delete_task: async (req, res) => {
-    if (!req.user.role == "admin") {
-      res.json("you are not allowed");
-    }
-    if (req.user.role === "admin") {
-      const task = await Task.findByPk(req.params.id);
-      if (!task) {
-        res.json("no task was found");
-      }
-      if (task) {
-        await Task.destroy({ where: { id: req.params.id } });
-        res.json("task is deleted");
-      }
-    }
-  },
-};
+    const id = req.params.id;
+    const task = await Task.findByPk(req.params.id);
+    await task.destroy();
+    res.json({ message: "task is deleted!" });
+  }
+}
