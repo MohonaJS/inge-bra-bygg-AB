@@ -46,4 +46,11 @@ module.exports = {
     const task_message = await Task_message.findAll();
     res.json(task_message);
   },
+
+  delete_task: async (req, res) => {
+    const id = req.params.id;
+    const task = await Task.findByPk(req.params.id);
+    await task.destroy();
+    res.json({ message: "task is deleted!" });
+  },
 };

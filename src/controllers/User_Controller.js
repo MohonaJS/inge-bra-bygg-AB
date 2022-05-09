@@ -33,6 +33,30 @@ module.exports = {
       res.json("user already exists");
     }
   },
+
+  update_user: async (req, res) => {
+    const id = req.params.id;
+    const user = await User.findByPk(id);
+    const hash = generateHash(req.body.password);
+    const new_user = user.update(
+      {
+        name: req.body.name,
+        email: req.body.email,
+        password: hash,
+        role: req.body.role,
+      },
+      { where: { id } }
+    );
+
+    res.json("user updated ");
+  },
+
+  delete_user: async (req, res) => {
+    const id = req.params.id;
+    const user = await User.findByPk(req.params.id);
+    await user.destroy();
+    res.json({ message: "user is deleted!" });
+  },
 };
 
 function generateHash(password) {

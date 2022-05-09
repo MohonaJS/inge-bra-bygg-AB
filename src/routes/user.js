@@ -20,6 +20,13 @@ router.post(
   asyncHandler(user_controller.create_user)
 );
 
+router.patch(
+  "/update_user/:id",
+  AdminMiddleware,
+  Validations.createUser,
+  asyncHandler(user_controller.update_user)
+);
+
 router.delete(
   "/delete_user/:id",
   AdminMiddleware,
