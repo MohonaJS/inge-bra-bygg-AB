@@ -27,14 +27,5 @@ const seed = async () => {
     password: "1",
     role: "client",
   });
-
-  // await Task.create({
-  //   // user_id: "teja",
-  //   task_id: "house",
-  //   employee_id: "nabhan",
-  //   client_id: "teja",
-  //   image: "house.png",
-  //   status: false,
-  // });
 };
 seed();

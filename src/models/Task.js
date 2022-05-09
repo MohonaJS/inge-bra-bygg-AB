@@ -2,32 +2,33 @@ module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define(
     "task",
     {
-      task_id: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
-        // unique: true,
       },
-      // employee_id: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      //   // unique: true,
-      // },
+
+      desc: {
+        type: DataTypes.STRING,
+        // allowNull: false,
+      },
+
       client_id: {
         type: DataTypes.STRING,
-        allowNull: false,
-        // unique: true,
+        // allowNull: false,
       },
-      // name: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
+
+      employee_id: {
+        type: DataTypes.STRING,
+        // allowNull: false,
+      },
+
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
+
       status: {
         type: DataTypes.BOOLEAN,
-        default: false,
+        // default: false,
       },
     },
     {

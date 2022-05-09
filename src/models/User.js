@@ -1,31 +1,31 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
-    "users",
+    "user",
     {
-      // user_id: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      //   unique: true,
-      // },
-
+      user_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
       email: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
       password: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       role: {
-        type: DataTypes.ENUM("admin", "employee", "client"),
-        // allowNull: false,
-        // defaultValue: "admin",
+        type: DataTypes.STRING,
+        enum: ["admin", "employee", "client"],
+        defaultValue: "client",
+        allowNull: false,
       },
     },
     {
@@ -33,6 +33,24 @@ module.exports = (sequelize, DataTypes) => {
       updatedAt: "updated_at",
     }
   );
+
+  User.login = async (name, password) => {
+    const user = await User.findOne({ where: { name: name } });
+    if (!user) {
+      console.log("error user model");
+    }
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (validPassword) {
+      const payload = {
+        name: user.name,
+        password: user.password,
+        role: user.role,
+      };
+      return jwt.sign(payload, process.env.SECRET, { expiresIn: "2w" });
+    } else {
+      console.log("error user model down");
+    }
+  };
 
   User.beforeCreate(async (user, options) => {
     const bcrypt = require("bcrypt");

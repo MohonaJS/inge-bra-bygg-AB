@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
         message: "Unauthorize",
       });
     } else {
-      if (decoded.data.role === "client") {
+      if (decoded.role === "client") {
         next();
       } else {
         res.status(401).json({

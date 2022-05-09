@@ -12,7 +12,6 @@ const loginPage = async (req, res) => {
 const login = async (req, res) => {
   let { name, password } = req.body;
   let user = await User.findOne({ where: { name } });
-  // let dbPassword = await User.findOne({ where: { password } });
   let hashPassword = await bcrypt.compare(password, user.password);
 
   let payload = {

@@ -1,13 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
   const Task_Message = sequelize.define(
-    "task_messages",
+    "task_message",
     {
-      task_messages_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+      task_message_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
       },
-      task_messages_content: {
+      task_message_content: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      worker_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      // user_id: {
+      //   type: DataTypes.STRING,
+      //   allowNull: false,
+      // },
     },
     {
       createdAt: "created_at",

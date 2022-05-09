@@ -1,6 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const dotenv = require("dotenv");
-const { setDefaultResultOrder } = require("dns");
 dotenv.config({ path: "./.env" });
 
 const sequelize = new Sequelize({
@@ -24,7 +23,7 @@ db.sequelize = sequelize;
 db.user = require("../models/User")(sequelize, DataTypes);
 db.task = require("../models/Task")(sequelize, DataTypes);
 db.task_message = require("../models/Task_message")(sequelize, DataTypes);
-db.conversation = require("../models/Conversation")(sequelize, DataTypes);
+// db.conversation = require("../models/Conversation")(sequelize, DataTypes);
 
 db.sequelize.sync({ force: false });
 
