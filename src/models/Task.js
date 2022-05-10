@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
 
-      // client_id: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
+      client_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
 
       // employee_id: {
       //   type: DataTypes.STRING,

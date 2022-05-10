@@ -20,21 +20,21 @@ const validator = (validators) => async (req, res, next) => {
 
 module.exports = {
   login: validator([
-    check("name").exists().withMessage("Missing name"),
-    check("email").exists().withMessage("Missing email"),
-    check("password").exists().withMessage("Missing password"),
-    check("role").exists().withMessage("Missing role"),
+    check("name").exists().withMessage("enter your name"),
+    check("email").exists().withMessage("enter your email"),
+    check("password").exists().withMessage("enter your password"),
+    check("role").exists().withMessage("enter your role"),
   ]),
 
-  createUser: validator([
-    check("name").exists().withMessage("Name missing"),
-    check("email").exists().withMessage("Email missing"),
-    check("password").exists().withMessage("Password missing"),
-    check("role").exists().withMessage("Role missing"),
+  create_user: validator([
+    check("name").exists().withMessage("enter your email"),
+    check("email").exists().withMessage("enter your password"),
+    check("password").exists().withMessage("enter your role"),
+    check("role").exists().withMessage("enter your name"),
   ]),
 
   create_task: validator([
-    check("title").exists().withMessage("Title missing"),
-    check("desc").exists().withMessage("Description missing"),
+    check("title").exists().withMessage("enter your title"),
+    check("desc").exists().withMessage("enter your desc"),
   ]),
 };

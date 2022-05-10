@@ -37,6 +37,17 @@ module.exports = {
     }
   },
 
+  delete_task: async (req, res) => {
+    const id = req.params.id;
+    const task = await Task.findByPk(req.params.id);
+    if (task) {
+      await task.destroy();
+      res.json({ message: "task is deleted!" });
+    } else {
+      res.json({ message: "task does not exist!" });
+    }
+  },
+
   create_task_message: async (req, res) => {
     const task = await Task_message.create(req.body);
     res.json("task message is created");
@@ -47,10 +58,14 @@ module.exports = {
     res.json(task_message);
   },
 
-  delete_task: async (req, res) => {
+  delete_task_message: async (req, res) => {
     const id = req.params.id;
-    const task = await Task.findByPk(req.params.id);
-    await task.destroy();
-    res.json({ message: "task is deleted!" });
+    const task_message = await Task_message.findByPk(req.params.id);
+    if (task_message) {
+      await task_message.destroy();
+      res.json({ message: "task message is deleted!" });
+    } else {
+      res.json({ message: "task message does not exist!" });
+    }
   },
 };

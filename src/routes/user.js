@@ -9,21 +9,27 @@ const user_controller = require("../controllers/User_Controller");
 const asyncHandler = require("../../utils/asyncHandler");
 const Validations = require("../../validations");
 
-router.get("/get_all_users", Authenticate.user, user_controller.get_all_users);
+router.get("/get_all_users", AdminMiddleware, user_controller.get_all_users);
 
-router.get("/get_single_user/:id", user_controller.get_single_user);
+router.get(
+  "/get_single_user/:id",
+  AdminMiddleware,
+  user_controller.get_single_user
+);
+
+router.get("/get_me/:id", user_controller.get_me);
 
 router.post(
   "/create_user",
   AdminMiddleware,
-  Validations.createUser,
+  Validations.create_user,
   asyncHandler(user_controller.create_user)
 );
 
 router.patch(
   "/update_user/:id",
   AdminMiddleware,
-  Validations.createUser,
+  Validations.create_user,
   asyncHandler(user_controller.update_user)
 );
 

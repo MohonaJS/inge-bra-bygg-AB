@@ -29,7 +29,7 @@ router.post(
 
 router.delete(
   "/delete_task/:id",
-  Authenticate.user,
+  AdminMiddleware,
   asyncHandler(task_controller.delete_task)
 );
 
@@ -43,6 +43,12 @@ router.get(
   "/:id/get_task_message",
   Authenticate.user,
   asyncHandler(task_controller.get_task_message)
+);
+
+router.delete(
+  "/:id/delete_task_message",
+  AdminMiddleware,
+  asyncHandler(task_controller.delete_task_message)
 );
 
 module.exports = router;

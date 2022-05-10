@@ -4,18 +4,30 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   get_all_users: async (req, res) => {
-    if (req.user.role == "admin" || req.user.role == "employee") {
-      const users = await User.findAll({});
-      res.json(users);
-    } else if (req.user.role == "client") {
-      const user = await User.findOne({ where: { role: req.user.role } });
-      res.json(user);
-    }
+    const users = await User.findAll({
+      attributes: { exclude: ["password"] },
+    });
+    res.json(users);
   },
 
   get_single_user: async (req, res) => {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id, {
+      attributes: { exclude: ["password"] },
+    });
     res.json(user);
+  },
+
+  get_me: async (req, res) => {
+    const id = req.params.id;
+    const db_user = await User.findAll({
+      attributes: { exclude: ["password"] },
+    });
+
+    if (id == db_user.user_id) {
+      res.json("allowed");
+    } else {
+      res.json("now allowed");
+    }
   },
 
   create_user: async (req, res) => {
@@ -54,8 +66,12 @@ module.exports = {
   delete_user: async (req, res) => {
     const id = req.params.id;
     const user = await User.findByPk(req.params.id);
-    await user.destroy();
-    res.json({ message: "user is deleted!" });
+    if (user) {
+      await user.destroy();
+      res.json({ message: "user is deleted!" });
+    } else {
+      res.json({ message: "user does not exist!" });
+    }
   },
 };
 

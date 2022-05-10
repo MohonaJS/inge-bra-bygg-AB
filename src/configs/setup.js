@@ -16,16 +16,8 @@ const Task_Message = db_config.task_message;
 
 // Task.belongsTo(User);
 
-// User.hasMany(Task);
-// Task.belongsTo(User);
-
-User.hasMany(Task, { foreignKey: "client_id" });
-Task.belongsTo(User, { targetKey: "user_id", foreignKey: "client_id" });
-Task.belongsTo(User, { targetKey: "user_id", foreignKey: "employee_id" });
-
-// User.belongsToMany(Task, { through: Task_Message });
-// Task.belongsToMany(User, { through: Task_Message });
-// Task.belongsTo(Task);
+User.hasMany(Task);
+Task.belongsTo(User);
 
 module.exports = {
   User,
