@@ -19,8 +19,8 @@ const seed = async () => {
   });
 
   await User.create({
-    name: "teja",
-    email: "teja@client.com",
+    name: "kalle",
+    email: "kalle@client.com",
     password: "1",
     role: "client",
   });

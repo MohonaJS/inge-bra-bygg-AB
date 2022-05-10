@@ -34,8 +34,7 @@ module.exports = {
   ]),
 
   create_task: validator([
-    check("task_subject").exists().withMessage("Missing task name"),
-    check("task_content").exists().withMessage("Missing task description"),
-    check("user_id").exists().withMessage("Missing user_id"),
+    check("title").exists().withMessage("Title missing"),
+    check("desc").exists().withMessage("Description missing"),
   ]),
 };
