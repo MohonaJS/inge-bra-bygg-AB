@@ -4,11 +4,6 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "user",
     {
-      user_id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -42,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     const validPassword = await bcrypt.compare(password, user.password);
     if (validPassword) {
       const payload = {
+        id: user.id,
         name: user.name,
         password: user.password,
         role: user.role,

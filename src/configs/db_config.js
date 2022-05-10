@@ -23,7 +23,11 @@ db.sequelize = sequelize;
 db.user = require("../models/User")(sequelize, DataTypes);
 db.task = require("../models/Task")(sequelize, DataTypes);
 db.task_message = require("../models/Task_message")(sequelize, DataTypes);
-// db.conversation = require("../models/Conversation")(sequelize, DataTypes);
+db.conversation = require("../models/Conversation")(sequelize, DataTypes);
+db.conversation_message = require("../models/Conversation_Message")(
+  sequelize,
+  DataTypes
+);
 
 db.sequelize.sync({ force: false });
 

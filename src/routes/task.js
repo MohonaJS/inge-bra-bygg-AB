@@ -34,7 +34,7 @@ router.delete(
 );
 
 router.post(
-  "/:id/create_task_message",
+  "/create_task_message",
   Authenticate.user,
   asyncHandler(task_controller.create_task_message)
 );

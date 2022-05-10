@@ -3,6 +3,9 @@ const Task = db.task;
 const Task_message = db.task_message;
 const User = db.user;
 
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
 module.exports = {
   create_task: async (req, res) => {
     const role = req.user.role;
@@ -49,8 +52,13 @@ module.exports = {
   },
 
   create_task_message: async (req, res) => {
-    const task = await Task_message.create(req.body);
-    res.json("task message is created");
+    const token = req.header("Authorization").replace("Bearer ", "");
+    const user = jwt.verify(token, process.env.SECRET);
+    const newVar = User.findByPk(user.id);
+    let text_message = { task_message_content: req.body.task_message_content };
+    await newVar.message(text_message);
+    // const task = await Task_message.create(req.body);
+    // res.json("task message is created");
   },
 
   get_task_message: async (req, res) => {
