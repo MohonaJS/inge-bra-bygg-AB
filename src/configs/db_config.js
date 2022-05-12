@@ -29,6 +29,4 @@ db.conversation_message = require("../models/Conversation_Message")(
   DataTypes
 );
 
-db.sequelize.sync({ force: false });
-
 module.exports = db;

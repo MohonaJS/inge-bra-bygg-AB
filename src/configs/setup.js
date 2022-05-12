@@ -7,8 +7,21 @@ const Conversation = db_config.conversation;
 const Conversation_Message = db_config.conversation_message;
 
 // 1- client can create a message
-User.hasMany(Task_Message, { as: "message" });
-Task_Message.belongsTo(User, { as: "user" });
+User.hasMany(Task_Message, {
+  foreignKey: "message",
+});
+
+Task_Message.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+User.hasMany(Task, {
+  foreignKey: "user_id",
+});
+
+Task.belongsTo(User, {
+  foreignKey: "user_id",
+});
 
 // User.belongsToMany(Conversation, { through: "ConversationUser" });
 // Conversation.belongsToMany(User, { through: "ConversationUser" });
@@ -36,3 +49,5 @@ module.exports = {
   Conversation,
   Conversation_Message,
 };
+
+db_config.sequelize.sync({ force: false });

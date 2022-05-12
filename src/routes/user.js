@@ -17,7 +17,7 @@ router.get(
   user_controller.get_single_user
 );
 
-router.get("/get_me/:id", user_controller.get_me);
+router.get("/get_me", Authenticate.user, user_controller.get_me);
 
 router.post(
   "/create_user",

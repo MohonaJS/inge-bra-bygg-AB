@@ -12,9 +12,24 @@ module.exports = {
     if (role == "client") {
       res.json("you are not allowed");
     }
+    const title = req.body.title;
+    const desc = req.body.desc;
+    const client_id = req.body.client_id;
+    const image = req.body.image;
+    const status = req.body.status;
+    let id = req.user.id;
+
     if (role == "employee" || role == "admin") {
-      const task = await Task.create(req.body);
-      res.json("task is created");
+      const task = await Task.create({
+        title: title,
+        desc: desc,
+        client_id: client_id,
+        image: image,
+        status: status,
+        user_id: id,
+      });
+      // const task = await Task.create(req.body);
+      res.json("task is created by " + req.user.name);
     }
   },
 
@@ -52,13 +67,21 @@ module.exports = {
   },
 
   create_task_message: async (req, res) => {
-    const token = req.header("Authorization").replace("Bearer ", "");
-    const user = jwt.verify(token, process.env.SECRET);
-    const newVar = User.findByPk(user.id);
-    let text_message = { task_message_content: req.body.task_message_content };
-    await newVar.message(text_message);
-    // const task = await Task_message.create(req.body);
-    // res.json("task message is created");
+    // const token = req.header("Authorization").replace("Bearer ", "");
+    // const user = jwt.verify(token, process.env.SECRET);
+
+    // const newVar = await User.findByPk(user.id);
+    // console.log(newVar);
+    let text_message = req.body.task_message_content;
+    let id = req.user.id;
+
+    // await newVar.message(text_message);
+    const task = await Task_message.create({
+      task_message_content: text_message,
+      user_id: id,
+    });
+
+    res.json("task message is created by  " + req.user.name);
   },
 
   get_task_message: async (req, res) => {

@@ -13,26 +13,26 @@ const login = async (req, res) => {
   let { name, password } = req.body;
   let user = await User.findOne({ where: { name } });
   res.send(user);
-  // let hashPassword = await bcrypt.compare(password, user.password);
+  let hashPassword = await bcrypt.compare(password, user.password);
 
-  // let payload = {
-  //   exp: Math.floor(Date.now() / 1000) + 60 * 60,
-  //   data: user,
-  // };
+  let payload = {
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+    data: user,
+  };
 
-  // if (user && hashPassword) {
-  //   res.status(200).json({
-  //     status: "ok",
-  //     data: user,
-  //     token: jwt.sign(payload, process.env.SECRET),
-  //     message: "Login Successfully",
-  //   });
-  // } else {
-  //   res.status(401).json({
-  //     status: "not ok",
-  //     message: "Invalid User or Password",
-  //   });
-  // }
+  if (user && hashPassword) {
+    res.status(200).json({
+      status: "ok",
+      data: user,
+      token: jwt.sign(payload, process.env.SECRET),
+      message: "Login Successfully",
+    });
+  } else {
+    res.status(401).json({
+      status: "not ok",
+      message: "Invalid User or Password",
+    });
+  }
 };
 
 module.exports = {

@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: "client",
         allowNull: false,
       },
-    },
-    {
-      createdAt: "created_at",
-      updatedAt: "updated_at",
     }
+    // {
+    //   createdAt: "created_at",
+    //   updatedAt: "updated_at",
+    // }
   );
 
   User.login = async (name, password) => {
@@ -39,9 +39,11 @@ module.exports = (sequelize, DataTypes) => {
       const payload = {
         id: user.id,
         name: user.name,
+        email: user.email,
         password: user.password,
         role: user.role,
       };
+
       return jwt.sign(payload, process.env.SECRET, { expiresIn: "2w" });
     } else {
       console.log("error user model down");

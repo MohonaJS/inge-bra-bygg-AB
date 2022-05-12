@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     "conversation_message",
     {
       content: {
-        type: DataTypes.TEXT("long"),
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       type: {

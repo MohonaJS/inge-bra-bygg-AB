@@ -18,15 +18,12 @@ module.exports = {
   },
 
   get_me: async (req, res) => {
-    const id = req.params.id;
-    const db_user = await User.findAll({
-      attributes: { exclude: ["password"] },
-    });
-
-    if (id == db_user.user_id) {
-      res.json("allowed");
+    const user = await req.user;
+    const db_user = await User.findOne({ where: { id: user.id } });
+    if (db_user) {
+      res.json(db_user);
     } else {
-      res.json("now allowed");
+      res.json("go to India");
     }
   },
 

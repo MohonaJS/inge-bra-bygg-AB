@@ -1,7 +1,6 @@
 const db_config = require("./db_config");
 
 const User = db_config.user;
-const Task = db_config.task;
 
 const seed = async () => {
   await User.create({
