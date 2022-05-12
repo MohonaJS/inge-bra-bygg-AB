@@ -7,7 +7,6 @@ const Validations = require("../../validations");
 
 const Authenticate = require("../middlewares/Authenticate");
 const AdminMiddleware = require("../middlewares/AdminMiddleware");
-const EmployeeMiddleware = require("../middlewares/EmployeeMiddleware");
 
 router.post(
   "/create_task",

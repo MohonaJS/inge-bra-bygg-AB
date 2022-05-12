@@ -1,6 +1,9 @@
 const express = require("express");
 const app = new express();
 
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+
 const path = require("path");
 const defaultPath = path.join(__dirname, "public");
 const bodyParser = require("body-parser");
@@ -21,6 +24,10 @@ app.use("/api/task", routes.task);
 // undefine routes
 app.use("*", (req, res) => {
   res.status(404).json({ status: "fail", data: "not found" });
+});
+
+app.listen(process.env.RUNNING_PORT, () => {
+  console.log(`server runs successfully at port ${process.env.RUNNING_PORT}`);
 });
 
 module.exports = app;

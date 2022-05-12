@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "user",
@@ -22,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: "client",
         allowNull: false,
       },
+    },
+    {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
     }
-    // {
-    //   createdAt: "created_at",
-    //   updatedAt: "updated_at",
-    // }
   );
 
   User.login = async (name, password) => {

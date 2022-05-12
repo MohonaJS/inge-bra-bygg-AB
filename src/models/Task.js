@@ -21,11 +21,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
 
-      // employee_id: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
-
       image: {
         type: DataTypes.STRING,
       },

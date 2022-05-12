@@ -28,7 +28,7 @@ module.exports = {
         status: status,
         user_id: id,
       });
-      // const task = await Task.create(req.body);
+
       res.json("task is created by " + req.user.name);
     }
   },
@@ -67,15 +67,9 @@ module.exports = {
   },
 
   create_task_message: async (req, res) => {
-    // const token = req.header("Authorization").replace("Bearer ", "");
-    // const user = jwt.verify(token, process.env.SECRET);
-
-    // const newVar = await User.findByPk(user.id);
-    // console.log(newVar);
     let text_message = req.body.task_message_content;
     let id = req.user.id;
 
-    // await newVar.message(text_message);
     const task = await Task_message.create({
       task_message_content: text_message,
       user_id: id,

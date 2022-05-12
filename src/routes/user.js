@@ -3,7 +3,6 @@ const router = express.Router();
 
 const Authenticate = require("../middlewares/Authenticate");
 const AdminMiddleware = require("../middlewares/AdminMiddleware");
-const EmployeeMiddleware = require("../middlewares/EmployeeMiddleware");
 const user_controller = require("../controllers/User_Controller");
 
 const asyncHandler = require("../../utils/asyncHandler");
