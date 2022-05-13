@@ -1,30 +1,31 @@
-const db = require("../../configs/db_config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
-const User = db.user;
-
-const loginPage = async (req, res) => {
-  res.render("login");
-};
+const User = require("../../models/User");
 
 const login = async (req, res) => {
   let { name, password } = req.body;
   let user = await User.findOne({ where: { name } });
-  res.send(user);
-  let hashPassword = await bcrypt.compare(password, user.password);
 
-  let payload = {
-    exp: Math.floor(Date.now() / 1000) + 60 * 60,
-    data: user,
-  };
+  if (!user) {
+    res.json("user not found");
+  }
 
-  if (user && hashPassword) {
-    res.status(200).json({
+  let match_password = await bcrypt.compare(password, user.password);
+
+  if (match_password) {
+    let payload = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      role: user.role,
+    };
+    let token = jwt.sign(payload, process.env.SECRET, { expiresIn: "2w" });
+    res.json({
       status: "ok",
-      data: user,
-      token: jwt.sign(payload, process.env.SECRET),
+      token,
       message: "Login Successfully",
     });
   } else {
@@ -37,5 +38,4 @@ const login = async (req, res) => {
 
 module.exports = {
   login,
-  loginPage,
 };

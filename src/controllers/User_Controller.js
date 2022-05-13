@@ -1,13 +1,28 @@
-const db = require("../configs/db_config");
-const User = db.user;
+const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 module.exports = {
   get_all_users: async (req, res) => {
-    const users = await User.findAll({
+    try {
+      const users = await User.findAll({
+        attributes: { exclude: ["password"] },
+      });
+
+      res.json(users);
+    } catch (error) {
+      res.json(error);
+    }
+  },
+
+  get_single_user: async (req, res) => {
+    const user = await User.findByPk(req.params.id, {
       attributes: { exclude: ["password"] },
     });
-    res.json(users);
+    if (user) {
+      res.json(user);
+    } else {
+      res.json("no user found");
+    }
   },
 
   get_single_user: async (req, res) => {
@@ -18,8 +33,7 @@ module.exports = {
   },
 
   get_me: async (req, res) => {
-    const user = await req.user;
-    const db_user = await User.findOne({ where: { id: user.id } });
+    const db_user = await User.findOne({ where: { id: req.user.id } });
     if (db_user) {
       res.json(db_user);
     } else {

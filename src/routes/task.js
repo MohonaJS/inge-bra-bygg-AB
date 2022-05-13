@@ -21,10 +21,16 @@ router.post(
     asyncHandler(task_controller.update_task)
   ),
   router.get(
-    "/get_task",
+    "/get_tasks",
     Authenticate.user,
-    asyncHandler(task_controller.get_task)
+    asyncHandler(task_controller.get_tasks)
   );
+
+router.get(
+  "/get_single_task/:id",
+  Authenticate.user,
+  asyncHandler(task_controller.get_single_task)
+);
 
 router.delete(
   "/delete_task/:id",
@@ -33,7 +39,7 @@ router.delete(
 );
 
 router.post(
-  "/create_task_message",
+  "/:id/create_task_message",
   Authenticate.user,
   asyncHandler(task_controller.create_task_message)
 );

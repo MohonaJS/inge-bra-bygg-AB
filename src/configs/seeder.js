@@ -1,8 +1,6 @@
-const db_config = require("./db_config");
+const User = require("../models/User");
 
-const User = db_config.user;
-
-const seed = async () => {
+(async () => {
   await User.create({
     name: "mohona",
     email: "mohona@admin.com",
@@ -23,5 +21,4 @@ const seed = async () => {
     password: "1",
     role: "client",
   });
-};
-seed();
+})();

@@ -3,20 +3,11 @@ const app = new express();
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
-
-const path = require("path");
-const defaultPath = path.join(__dirname, "public");
-const bodyParser = require("body-parser");
 const routes = require("./src/routes");
 
-// Api routes
-app.set("views", "./views");
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(express.static(defaultPath));
 
+// Api routes
 app.use("/api", routes.auth);
 app.use("/api/user", routes.user);
 app.use("/api/task", routes.task);
