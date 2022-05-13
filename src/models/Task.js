@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../configs/db_config");
+const sequelize = require("../configs/dbConfig");
 require("dotenv").config();
 
 const Task = sequelize.define(
@@ -27,6 +27,7 @@ const Task = sequelize.define(
 
     image: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
 
     status: {

@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../configs/db_config");
+const sequelize = require("../configs/dbConfig");
 require("dotenv").config();
 
-const Task_Message = sequelize.define(
-  "Task_Message",
+const TaskMessage = sequelize.define(
+  "TaskMessage",
   {
     task_message_content: {
       type: DataTypes.STRING,
@@ -22,4 +22,4 @@ const Task_Message = sequelize.define(
     updatedAt: "updated_at",
   }
 );
-module.exports = Task_Message;
+module.exports = TaskMessage;

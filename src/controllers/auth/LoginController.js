@@ -9,7 +9,7 @@ const login = async (req, res) => {
   let user = await User.findOne({ where: { name } });
 
   if (!user) {
-    res.json("user not found");
+    res.json({ message: "user not found" });
   }
 
   let match_password = await bcrypt.compare(password, user.password);

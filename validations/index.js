@@ -27,10 +27,10 @@ module.exports = {
   ]),
 
   create_user: validator([
-    check("name").exists().withMessage("enter your email"),
-    check("email").exists().withMessage("enter your password"),
-    check("password").exists().withMessage("enter your role"),
-    check("role").exists().withMessage("enter your name"),
+    check("name").exists().withMessage("enter your name"),
+    check("email").exists().withMessage("enter your email"),
+    check("password").exists().withMessage("enter your password"),
+    check("role").exists().withMessage("enter your role"),
   ]),
 
   create_task: validator([

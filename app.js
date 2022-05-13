@@ -14,7 +14,7 @@ app.use("/api/task", routes.task);
 
 // undefine routes
 app.use("*", (req, res) => {
-  res.status(404).json({ status: "fail", data: "not found" });
+  res.status(404).json({ status: "fail", data: "no endpoint found" });
 });
 
 app.listen(process.env.RUNNING_PORT, () => {

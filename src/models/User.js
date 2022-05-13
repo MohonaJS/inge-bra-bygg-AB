@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { DataTypes } = require("sequelize");
-const sequelize = require("../configs/db_config");
+const sequelize = require("../configs/dbConfig");
 
 require("dotenv").config();
 
@@ -10,14 +10,17 @@ const User = sequelize.define("User", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
   email: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
   password: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
   role: {
     type: DataTypes.STRING,
     enum: ["admin", "employee", "client"],
@@ -28,8 +31,8 @@ const User = sequelize.define("User", {
 
 User.beforeCreate(async (user, options) => {
   const bcrypt = require("bcrypt");
-  const hashedPassword = await bcrypt.hash(user.password, 10);
-  user.password = hashedPassword;
+  const hash_password = await bcrypt.hash(user.password, 10);
+  user.password = hash_password;
 });
 
 module.exports = User;

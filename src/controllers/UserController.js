@@ -21,46 +21,40 @@ module.exports = {
     if (user) {
       res.json(user);
     } else {
-      res.json("no user found");
+      res.json({ message: "no user found" });
     }
   },
 
-  get_single_user: async (req, res) => {
-    const user = await User.findByPk(req.params.id, {
-      attributes: { exclude: ["password"] },
-    });
-    res.json(user);
-  },
 
   get_me: async (req, res) => {
     const db_user = await User.findOne({ where: { id: req.user.id } });
     if (db_user) {
       res.json(db_user);
     } else {
-      res.json("go to India");
+      res.json({ message: "try again" });
     }
   },
 
   create_user: async (req, res) => {
     const existed_user = await User.findOne({ where: { name: req.body.name } });
     if (!existed_user) {
-      const hash = generateHash(req.body.password);
+      const hash = generate_hash(req.body.password);
       const user = await User.create({
         name: req.body.name,
         email: req.body.email,
         password: hash,
         role: req.body.role,
       });
-      res.json("user is created");
+      res.json({ message: "user is created" });
     } else {
-      res.json("user already exists");
+      res.json({ message:"user already exists" });
     }
   },
 
   update_user: async (req, res) => {
     const id = req.params.id;
     const user = await User.findByPk(id);
-    const hash = generateHash(req.body.password);
+    const hash = generate_hash(req.body.password);
     const new_user = user.update(
       {
         name: req.body.name,
@@ -71,7 +65,7 @@ module.exports = {
       { where: { id } }
     );
 
-    res.json("user updated ");
+    res.json({ message: "user updated " });
   },
 
   delete_user: async (req, res) => {
@@ -86,7 +80,7 @@ module.exports = {
   },
 };
 
-function generateHash(password) {
+function generate_hash(password) {
   const hash = bcrypt.hashSync(password, 10);
   return hash;
 }
