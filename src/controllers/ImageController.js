@@ -1,25 +1,56 @@
-const fs = require("fs");
-const path = require("path");
+const Task = require("../models/Task");
 
 module.exports = {
-  get_image: (req, res) => {
-    const images = fs.readdirSync(path.join("public", "images"));
-    res.json({ images });
-  },
+  upload_image: async (req, res) => {
+    const id = req.params.id;
+    const task = await Task.findByPk(id);
 
-  upload_image: (req, res) => {
-    if (!req.files.image.mimetype.startsWith("image/")) {
-      res.json({ message: "you can only upload images" });
+    if (req.user.role == "client") {
+      res.json({ message: "not allowed" });
     }
 
-    if (fs.existsSync(path.join("public", "images", req.files.image.name))) {
-      res.json({ message: "file already exists" });
+    const image = req.file.filename;
+
+    if (task) {
+      if (req.user.role == "admin" || req.user.role == "employee") {
+        await task.update({ image: image }, { where: { id } });
+        res.json({ message: "image is uploaded" });
+      }
+    } else {
+      res.json({ message: "no task found. enter a valid task" });
+    }
+  },
+
+  get_image: async (req, res) => {
+    const id = req.params.id;
+    const task = await Task.findByPk(id);
+    const user_id = req.user.id;
+    const role = req.user.role;
+
+    if (role == "client" && task.client_id != user_id) {
+      res.json({ message: "not allowed" });
     }
 
-    fs.copyFileSync(
-      req.files.image.tempFilePath,
-      path.join("public", "images", req.files.image.name)
-    );
-    res.json({ message: "image is uploaded" });
+    const show_image = await Task.findOne({
+      attributes: ["image"],
+      where: { id: id },
+    });
+    res.json(show_image);
   },
+
+  //   tried a lot but does not work. either the whole task is deleted or
+  // nothing else. don't know how to delete one specific column from a table
+  /*   delete_image: async (req, res) => {
+    const id = req.params.id;
+    const task = await Task.findByPk(id);
+    if (task) {
+      await task.destroy({
+        // attributes: ["image"],
+        where: { id: id },
+      });
+      res.json({ message: "image is deleted!" });
+    } else {
+      res.json({ message: "image does not exist!" });
+    }
+  }, */
 };

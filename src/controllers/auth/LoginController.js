@@ -26,12 +26,12 @@ const login = async (req, res) => {
     res.json({
       status: "ok",
       token,
-      message: "Login Successfully",
+      message: "login Successfully",
     });
   } else {
     res.status(401).json({
       status: "not ok",
-      message: "Invalid User or Password",
+      message: "invalid Password",
     });
   }
 };

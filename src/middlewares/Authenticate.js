@@ -9,7 +9,7 @@ module.exports = {
       req.user = user;
       next();
     } catch (error) {
-      res.status(401).send({ error: "Token is invalid" });
+      res.status(401).send({ error: "token is invalid" });
     }
   },
 
@@ -23,7 +23,7 @@ module.exports = {
       }
       next();
     } catch (error) {
-      res.status(401).send({ error: "Token is invalid" });
+      res.status(401).send({ error: "token is invalid" });
     }
   },
 };

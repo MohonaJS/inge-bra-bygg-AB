@@ -8,6 +8,7 @@ const routes = require("./src/routes");
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+
 // Api routes
 app.use("/api", routes.auth);
 app.use("/api/user", routes.user);

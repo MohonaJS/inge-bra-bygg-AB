@@ -6,7 +6,6 @@ const db = require("./dbConfig");
 
 User.hasMany(Task);
 Task.belongsTo(User);
-
 TaskMessage.belongsTo(User, { foreignKey: "user_id" });
 TaskMessage.belongsTo(Task, { foreignKey: "task_id" });
 

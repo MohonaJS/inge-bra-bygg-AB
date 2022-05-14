@@ -5,7 +5,6 @@ const { login } = require("../controllers/auth/LoginController");
 const asyncHandler = require("../../utils/asyncHandler");
 const Validations = require("../../validations");
 
-
 router.post("/login", Validations.login, asyncHandler(login));
 
 module.exports = router;

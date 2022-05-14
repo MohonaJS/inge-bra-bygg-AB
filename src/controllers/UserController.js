@@ -25,7 +25,6 @@ module.exports = {
     }
   },
 
-
   get_me: async (req, res) => {
     const db_user = await User.findOne({ where: { id: req.user.id } });
     if (db_user) {
@@ -47,7 +46,7 @@ module.exports = {
       });
       res.json({ message: "user is created" });
     } else {
-      res.json({ message:"user already exists" });
+      res.json({ message: "user already exists" });
     }
   },
 

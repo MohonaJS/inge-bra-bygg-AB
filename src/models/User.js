@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const { DataTypes } = require("sequelize");
 const sequelize = require("../configs/dbConfig");
 
@@ -30,7 +29,6 @@ const User = sequelize.define("User", {
 });
 
 User.beforeCreate(async (user, options) => {
-  const bcrypt = require("bcrypt");
   const hash_password = await bcrypt.hash(user.password, 10);
   user.password = hash_password;
 });
