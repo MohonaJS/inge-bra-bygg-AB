@@ -6,11 +6,13 @@ dotenv.config({ path: "./.env" });
 const routes = require("./src/routes");
 
 app.use(express.json());
-
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 // Api routes
 app.use("/api", routes.auth);
 app.use("/api/user", routes.user);
 app.use("/api/task", routes.task);
+app.use("/api/images", routes.images);
 
 // undefine routes
 app.use("*", (req, res) => {
