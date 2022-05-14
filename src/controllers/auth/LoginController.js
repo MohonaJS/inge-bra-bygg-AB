@@ -5,8 +5,8 @@ dotenv.config({ path: "./.env" });
 const User = require("../../models/User");
 
 const login = async (req, res) => {
-  let { name, password } = req.body;
-  let user = await User.findOne({ where: { name } });
+  let { email, password } = req.body;
+  let user = await User.findOne({ where: { email } });
 
   if (!user) {
     res.json({ message: "user not found" });

@@ -23,7 +23,7 @@ module.exports = {
         status: status,
         employee_id: id,
       });
-      res.json({ message:"task is created" } );
+      res.json({ message: "task is created" });
     }
   },
 
@@ -86,19 +86,29 @@ module.exports = {
   create_task_message: async (req, res) => {
     let id = req.user.id;
     let task_id = req.params.id;
-    let task_message = req.body.task_message_content;
-    const task = await TaskMessage.create({
-      task_message_content: task_message,
-      user_id: id,
-      task_id: task_id,
-    });
 
-    res.json({ message: "task message is created" })
+    const found_task = await Task.findByPk(task_id);
+
+    let task_message = req.body.task_message_content;
+
+    if (found_task) {
+      const task = await TaskMessage.create({
+        task_message_content: task_message,
+        user_id: id,
+        task_id: task_id,
+      });
+      res.json({ message: "task message is created" });
+    } else {
+      res.json({
+        message: "no task found. please enter a correct task number",
+      });
+    }
   },
 
   get_task_message: async (req, res) => {
     const id = req.params.id;
     const task = await Task.findByPk(id);
+    console.log(task);
     const user_id = req.user.id;
     const role = req.user.role;
 

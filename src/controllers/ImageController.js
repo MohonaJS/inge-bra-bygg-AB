@@ -35,7 +35,12 @@ module.exports = {
       attributes: ["image"],
       where: { id: id },
     });
-    res.json(show_image);
+
+    if (show_image) {
+      res.json(show_image);
+    } else {
+      res.json({ message: "not found" });
+    }
   },
 
   //   tried a lot but does not work. either the whole task is deleted or

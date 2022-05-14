@@ -20,10 +20,8 @@ const validator = (validators) => async (req, res, next) => {
 
 module.exports = {
   login: validator([
-    check("name").exists().withMessage("enter your name"),
     check("email").exists().withMessage("enter your email"),
     check("password").exists().withMessage("enter your password"),
-    check("role").exists().withMessage("enter your role"),
   ]),
 
   create_user: validator([

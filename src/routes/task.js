@@ -40,13 +40,13 @@ router.delete(
 );
 
 router.post(
-  "/:id/create_task_message",
+  "/create_task_message/:id",
   Authenticate.user,
   async_handler(task_controller.create_task_message)
 );
 
 router.get(
-  "/:id/get_task_message",
+  "/get_task_message/:id",
   Authenticate.user,
   async_handler(task_controller.get_task_message)
 );

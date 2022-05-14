@@ -26,7 +26,10 @@ module.exports = {
   },
 
   get_me: async (req, res) => {
-    const db_user = await User.findOne({ where: { id: req.user.id } });
+    const db_user = await User.findOne({
+      where: { id: req.user.id },
+      attributes: { exclude: ["password"] },
+    });
     if (db_user) {
       res.json(db_user);
     } else {
