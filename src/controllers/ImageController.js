@@ -22,24 +22,28 @@ module.exports = {
   },
 
   get_image: async (req, res) => {
-    const id = req.params.id;
-    const task = await Task.findByPk(id);
-    const user_id = req.user.id;
-    const role = req.user.role;
+    try {
+      const id = req.params.id;
+      const task = await Task.findByPk(id);
+      const user_id = req.user.id;
+      const role = req.user.role;
 
-    if (role == "client" && task.client_id != user_id) {
-      res.json({ message: "not allowed" });
-    }
+      if (role == "client" && task.client_id != user_id) {
+        res.json({ message: "not allowed" });
+      }
 
-    const show_image = await Task.findOne({
-      attributes: ["image"],
-      where: { id: id },
-    });
+      const show_image = await Task.findOne({
+        attributes: ["image"],
+        where: { id: id },
+      });
 
-    if (show_image) {
-      res.json(show_image);
-    } else {
-      res.json({ message: "not found" });
+      if (show_image) {
+        res.json(show_image);
+      } else {
+        res.json({ message: "not found" });
+      }
+    } catch (error) {
+      res.json({ message: "Something went wrong. Contact your admin" });
     }
   },
 

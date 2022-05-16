@@ -10,7 +10,7 @@ module.exports = {
 
       res.json(users);
     } catch (error) {
-      res.json(error);
+      res.json(error.message);
     }
   },
 

@@ -39,7 +39,7 @@ module.exports = {
     res.json({ message: "task updated " });
   },
 
-  get_tasks: async (req, res) => {
+  get_tasks: async (req, res, next) => {
     if (req.user.role == "admin") {
       const tasks = await Task.findAll({});
       res.json(tasks);
@@ -55,31 +55,41 @@ module.exports = {
   },
 
   get_single_task: async (req, res) => {
-    const id = req.params.id;
-    const task = await Task.findByPk(id);
-    const user_id = req.user.id;
-    const role = req.user.role;
+    try {
+      const id = req.params.id;
+      const task = await Task.findByPk(id);
+      const user_id = req.user.id;
+      const role = req.user.role;
 
-    if (role == "client" && task.client_id != user_id) {
-      res.json({ message: "not allowed" });
+      if (role == "client" && task.client_id != user_id) {
+        res.json({ message: "not allowed" });
+      }
+
+      if (role == "employee" && task.employee_id != user_id) {
+        res.json({ message: "not allowed" });
+      }
+
+      const show_task = await Task.findOne({ where: { id: id } });
+      if (show_task) {
+        res.json(show_task);
+      }
+    } catch (error) {
+      res.json({ message: "Something went wrong. Contact your admin" });
     }
-
-    if (role == "employee" && task.employee_id != user_id) {
-      res.json({ message: "not allowed" });
-    }
-
-    const show_task = await Task.findAll({ where: { id: id } });
-    res.json(show_task);
   },
 
   delete_task: async (req, res) => {
-    const id = req.params.id;
-    const task = await Task.findByPk(req.params.id);
-    if (task) {
-      await task.destroy();
-      res.json({ message: "task is deleted" });
-    } else {
-      res.json({ message: "task does not exist" });
+    try {
+      const id = req.params.id;
+      const task = await Task.findByPk(req.params.id);
+      if (task) {
+        await task.destroy();
+        res.json({ message: "task is deleted" });
+      } else {
+        res.json({ message: "task does not exist" });
+      }
+    } catch (error) {
+      res.json({ message: "Something went wrong. Contact your admin" });
     }
   },
 
@@ -106,21 +116,30 @@ module.exports = {
   },
 
   get_task_message: async (req, res) => {
-    const id = req.params.id;
-    const task = await Task.findByPk(id);
-    console.log(task);
-    const user_id = req.user.id;
-    const role = req.user.role;
+    try {
+      const id = req.params.id;
+      const task = await Task.findByPk(id);
 
-    if (role == "client" && task.client_id != user_id) {
-      res.json({ message: "not allowed" });
-    }
-    if (role == "employee" && task.employee_id != user_id) {
-      res.json({ message: "not allowed" });
-    }
+      const user_id = req.user.id;
+      const role = req.user.role;
 
-    const msg = await TaskMessage.findAll({ where: { task_id: id } });
-    res.json(msg);
+      if (role == "client" && task.client_id != user_id) {
+        res.json({ message: "not allowed" });
+      }
+
+      if (role == "employee" && task.employee_id != user_id) {
+        res.json({ message: "not allowed" });
+      }
+
+      const msg = await TaskMessage.findAll({ where: { task_id: id } });
+      if (msg) {
+        res.json(msg);
+      } else {
+        throw new Error("not found");
+      }
+    } catch (error) {
+      res.json({ message: "Something went wrong. Contact your admin" });
+    }
   },
 
   delete_task_message: async (req, res) => {
